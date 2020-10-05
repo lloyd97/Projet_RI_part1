@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<robot name="RobotArm">
+
+	<material name="blue">
+		<color rgba="0 0 1 1"/>
+	</material>
+	<material name="red">
+		<color rgba="1 0 0 1"/>
+	</material>
+	<material name="green">
+		<color rgba="0 1 0 1"/>
+	</material>
+	<material name="turquoise">
+		<color rgba="0 1 0.8 1"/>
+	</material>
+	<material name="white">
+		<color rgba="1 1 1 1"/>
+	</material>
+
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<box size="0.9 1 0.2"/>
+			</geometry>
+			<origin xyz="0.0 0.0 0.1"/>
+			<material name="white"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.9 1 0.2"/>
+			</geometry>
+			<origin xyz="0.0 0.0 0.1"/>
+			<material name="white"/>
+		</collision>
+	</link>
+
+	<joint name="joint_base" type="fixed">
+		<parent link="base_link"/>
+		<child link="cylinder_link"/>
+		<origin xyz="0.35 0.0 0.0"/>
+	</joint>
+
+	<link name="cylinder_link">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" radius="0.08"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.025"/>
+			<material name="blue"/>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.05" radius="0.08"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.025"/>
+			<material name="blue"/>
+		</collision>
+	</link>
+
+	<joint name="joint_shoulder" type="revolute">
+		<parent link="cylinder_link"/>
+		<child link="link_shoulder"/>
+		<origin xyz="0.0 0.0 -0.080"/>
+		<axis xyz="0 0 1"/>
+		<limit effort="1000" lower="-3.14" upper="3.14" velocity="5"/>
+	</joint>
+
+	<link name="link_shoulder">
+		<visual>
+			<geometry>
+				<box size="0.02 0.03 0.06"/>
+			</geometry>
+			<material name="white"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.02 0.03 0.06"/>
+			</geometry>
+			<material name="white"/>
+		</collision>
+	</link>
+
+	<joint name="joint_elbow" type="revolute">
+		<parent link="link_shoulder"/>
+		<child link="link_elbow"/>
+		<origin xyz="0.0 0.030 -0.02"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="1000" lower="-3.14" upper="3.14" velocity="5"/>
+	</joint>
+
+	<link name="link_elbow">
+		<visual>
+			<geometry>
+				<box size="0.03 0.03 0.20"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.08"/>
+			<material name="turquoise"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.03 0.03 0.20"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.08"/>
+			<material name="turquoise"/>
+		</collision>
+	</link>
+
+	<joint name="joint_wrist" type="revolute">
+		<parent link="link_elbow"/>
+		<child link="link_wrist"/>
+		<origin xyz="0.0 -0.030 -0.18"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="1000" lower="-3.14" upper="3.14" velocity="5"/>
+	</joint>
+
+	<link name="link_wrist">
+		<visual>
+			<geometry>
+				<box size="0.03 0.03 0.20"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.08"/>
+			<material name="green"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.03 0.03 0.20"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.08"/>
+			<material name="green"/>
+		</collision>
+	</link>
+
+	<joint name="joint_end" type="revolute">
+		<parent link="link_wrist"/>
+		<child link="link_end"/>
+		<origin xyz="0.0 0.030 -0.18"/>
+		<axis xyz="0 1 0"/>
+		<limit effort="1000" lower="-3.14" upper="3.14" velocity="5"/>
+	</joint>
+
+	<link name="link_end">
+		<visual>
+			<geometry>
+				<box size="0.03 0.03 0.20"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.08"/>
+			<material name="red"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="0.03 0.03 0.20"/>
+			</geometry>
+			<origin xyz="0.0 0.0 -0.08"/>
+		</collision>
+	</link>
+
+
+</robot>

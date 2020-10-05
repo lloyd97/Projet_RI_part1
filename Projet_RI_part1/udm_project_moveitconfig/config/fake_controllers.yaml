@@ -1,0 +1,10 @@
+controller_list:
+  - name: fake_legmr_controller
+    joints:
+      - joint_shoulder
+      - joint_elbow
+      - joint_wrist
+      - joint_end
+initial:  # Define initial robot poses.
+  - group: legmr
+    pose: start
